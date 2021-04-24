@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>sheet2gmap</title>
+    <title>solalagmap</title>
     <style>
       #map {
         height: 100%;
@@ -30,7 +30,7 @@
     <div id="map"></div>
     <td><div id="sidebar"></div></td>
     <script src="constants.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?language=ja&region=JP&key=[API キーを入力してください]&callback=initMap" async defer></script>
+    <script src="https://maps.googleapis.com/maps/api/js?language=ja&region=JP&key=AIzaSyCGZImKMuiMaA2y5Wo_5j7tarSy630j3KU&callback=initMap" async defer></script>
     <script>
       var map;
       var marker = [];
@@ -76,15 +76,15 @@
 
       function addMarker(i, data) {
         var markerLatLng = new google.maps.LatLng({
-          lat: Number(data['緯度']),
-          lng: Number(data['経度'])
+          lat: Number(data['Ido']),
+          lng: Number(data['Keido'])
         });
         marker[i] = new google.maps.Marker({
           position: markerLatLng,
           map: map
         });
 
-        var info = '<div style="font-size:18px;font-weight:bold;margin-bottom:10px;">' + data['名称'] + '</div>';
+        var info = '<div style="font-size:18px;font-weight:bold;margin-bottom:10px;">' + data['Meisyo'] + '</div>';
         infoWindow[i] = new google.maps.InfoWindow({
           content: info
         });
@@ -95,15 +95,15 @@
       function setData(markerData){
         var sidebar_html = "";
         for (var i = 0; i < markerData.length; i++) {
-          var latitude = markerData[i]['緯度'];
+          var latitude = markerData[i]['Ido'];
           if (!latitude) { continue; }
           addMarker(i, markerData[i]);
-          var name = markerData[i]['名称'];
+          var name = markerData[i]['Meisyo'];
 
           sidebar_html += `<b>${i + 1}</b> <a href="javascript:openWindow(${i})">${name}<\/a><br />`;
         }
 
-        document.getElementById("sidebar").innerHTML = `<a target="_blank" href="https://docs.google.com/spreadsheets/d/${SHEET_ID}/edit?usp=sharing">元データ(Google スプレッドシート)</a><br /><a target="_blank" href="https://github.com/champierre/sheet2gmap">ソースコード(GitHub)</a><br /><br />` + sidebar_html;
+        document.getElementById("sidebar").innerHTML = `<a target="_blank" href="https://docs.google.com/spreadsheets/d/${SHEET_ID}/edit?usp=sharing">元データ(Google スプレッドシート)</a><br /><a target="_blank" href="http://best.starfree.jp/solala/">ソースコード()</a><br /><br />` + sidebar_html;
       }
 
       function markerEvent(i) {
